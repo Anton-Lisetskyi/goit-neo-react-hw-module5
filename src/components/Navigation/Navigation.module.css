@@ -1,0 +1,24 @@
+.navigation {
+  display: flex;
+  gap: 20px;
+  padding: 12px 24px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  list-style: none;
+  align-items: center;
+  text-align: center;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+}
+
+.navLink {
+  color: black;
+}
+
+.navLink:hover {
+  color: red;
+}
+
+.navLink.active {
+  color: red;
+}

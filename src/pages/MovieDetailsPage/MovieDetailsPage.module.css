@@ -1,0 +1,54 @@
+.backLink {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.poster {
+  width: 400px;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #e5e5e5;
+}
+
+.descriptionText {
+  display: flex;
+  gap: 20px;
+  color: black;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.sectionTitle {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.underImage {
+  color: black;
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
+  font-weight: bold;
+  border-top: 3px solid rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+}
+
+.extraInfoLinks {
+  list-style-type: disc;
+  color: black;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 20px;
+}

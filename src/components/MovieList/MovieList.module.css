@@ -1,0 +1,15 @@
+.movieList {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: black;
+  margin-left: 15px;
+}
+
+.movieTitle {
+  font-size: 15px;
+  text-decoration: underline;
+  color: blue;
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+}
