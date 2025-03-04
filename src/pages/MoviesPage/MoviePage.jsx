@@ -1,16 +1,19 @@
 import { useState, useEffect, useCallback } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { searchMovies } from "../../api/themoviedb";
 import MovieList from "../../components/MovieList/MovieList";
 import Error from "../../components/Error/Error";
+import Loader from "../../components/Loader/Loader";
 import css from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const currentQuery = searchParams.get("query") || "";
 
   const handleSearch = useCallback(
     async (query) => {
@@ -21,6 +24,7 @@ const MoviesPage = () => {
       }
 
       setError("");
+      setIsLoading(true);
 
       try {
         const result = await searchMovies(query);
@@ -35,21 +39,21 @@ const MoviesPage = () => {
         console.log("error", error);
         setError("Something went wrong. Please try again later.");
         setMovies([]);
+      } finally {
+        setIsLoading(false);
       }
 
-      navigate(`?query=${query}`);
+      setSearchParams({ query });
     },
-    [navigate]
+    [setSearchParams]
   );
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search).get("query") || "";
-    setQuery(queryParams);
-
-    if (queryParams) {
-      handleSearch(queryParams);
+    if (currentQuery) {
+      setQuery(currentQuery);
+      handleSearch(currentQuery);
     }
-  }, [location.search, handleSearch]);
+  }, [currentQuery, handleSearch]);
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -72,8 +76,9 @@ const MoviesPage = () => {
         />
         <button type="submit">Search</button>
       </form>
+      {isLoading && <Loader />}
       {error && <Error message={error} />}
-      <MovieList movies={movies} />
+      {!isLoading && <MovieList movies={movies} />}{" "}
     </div>
   );
 };
